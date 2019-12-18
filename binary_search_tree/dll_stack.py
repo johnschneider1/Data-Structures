@@ -1,6 +1,3 @@
-"""Each ListNode holds a reference to its previous node
-as well as its next node in the List."""
-
 
 class ListNode:
     def __init__(self, value, prev=None, next=None):
@@ -155,39 +152,27 @@ class DoublyLinkedList:
         return max_value
 
 
-# """Our doubly-linked list class. It holds references to
-# the list's head and tail nodes."""
+class Stack:
+    def __init__(self):
+        self.size = 0
+        # Why is our DLL a good choice to store our elements? this is a hint
+        # remove from head or tail is 0(1)
+        # doublylinkedlist is let's us be more consistent
+        self.storage = DoublyLinkedList()
 
+    def push(self, value):
+        # increment the size
+        self.size += 1
+        # add to the head or(tail)
+        self.storage.add_to_head(value)
 
-# class DoublyLinkedList:
-#     def __init__(self, node=None):
-#         self.head = node
-#         self.tail = node
-#         self.length = 1 if node is not None else 0
+    def pop(self):
+        # remove from end and return
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_from_head()
+        else:
+            return None
 
-#     def __len__(self):
-#         return self.length
-
-#     def add_to_head(self, value):
-#         pass
-
-#     def remove_from_head(self):
-#         pass
-
-#     def add_to_tail(self, value):
-#         pass
-
-#     def remove_from_tail(self):
-#         pass
-
-#     def move_to_front(self, node):
-#         pass
-
-#     def move_to_end(self, node):
-#         pass
-
-#     def delete(self, node):
-#         pass
-
-#     def get_max(self):
-#         pass
+    def len(self):
+        return self.size

@@ -1,5 +1,3 @@
-"""Each ListNode holds a reference to its previous node
-as well as its next node in the List."""
 
 
 class ListNode:
@@ -51,8 +49,8 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
-    """Wraps the given value in a ListNode and inserts it 
-    as the new head of the list. Don't forget to handle 
+    """Wraps the given value in a ListNode and inserts it
+    as the new head of the list. Don't forget to handle
     the old head node's previous pointer accordingly."""
 
     def add_to_head(self, value):
@@ -76,8 +74,8 @@ class DoublyLinkedList:
         self.delete(self.head)
         return value
 
-    """Wraps the given value in a ListNode and inserts it 
-    as the new tail of the list. Don't forget to handle 
+    """Wraps the given value in a ListNode and inserts it
+    as the new tail of the list. Don't forget to handle
     the old tail node's next pointer accordingly."""
 
     def add_to_tail(self, value):
@@ -92,7 +90,7 @@ class DoublyLinkedList:
             self.tail.next = new_node
             self.tail = new_node
 
-    """Removes the List's current tail node, making the 
+    """Removes the List's current tail node, making the
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
 
@@ -101,7 +99,7 @@ class DoublyLinkedList:
         self.delete(self.tail)
         return value
 
-    """Removes the input node from its current spot in the 
+    """Removes the input node from its current spot in the
     List and inserts it as the new head node of the List."""
 
     def move_to_front(self, node):
@@ -111,7 +109,7 @@ class DoublyLinkedList:
         self.delete(node)
         self.add_to_head(value)
 
-    """Removes the input node from its current spot in the 
+    """Removes the input node from its current spot in the
     List and inserts it as the new tail node of the List."""
 
     def move_to_end(self, node):
@@ -155,39 +153,22 @@ class DoublyLinkedList:
         return max_value
 
 
-# """Our doubly-linked list class. It holds references to
-# the list's head and tail nodes."""
+class Queue:
+    def __init__(self):
+        self.size = 0
+        # Why is our DLL a good choice to store our elements?
+        self.storage = DoublyLinkedList()
 
+    def enqueue(self, value):
+        self.storage.add_to_tail(value)
+        self.size += 1
 
-# class DoublyLinkedList:
-#     def __init__(self, node=None):
-#         self.head = node
-#         self.tail = node
-#         self.length = 1 if node is not None else 0
+    def dequeue(self):
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_from_head()
+        else:
+            return None
 
-#     def __len__(self):
-#         return self.length
-
-#     def add_to_head(self, value):
-#         pass
-
-#     def remove_from_head(self):
-#         pass
-
-#     def add_to_tail(self, value):
-#         pass
-
-#     def remove_from_tail(self):
-#         pass
-
-#     def move_to_front(self, node):
-#         pass
-
-#     def move_to_end(self, node):
-#         pass
-
-#     def delete(self, node):
-#         pass
-
-#     def get_max(self):
-#         pass
+    def len(self):
+        return self.size
