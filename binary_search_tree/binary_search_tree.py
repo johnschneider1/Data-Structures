@@ -11,45 +11,82 @@ class BinarySearchTree:
         self.right = None
 
     # Insert the given value into the tree
+    # each node is a tree
     def insert(self, value):
+        # nothing in the tree must add something, start on insert
         # if inserting we must already have a tree/root
         # if value is less than self.value go left, make a new tree/node if empth,
         # otherwise keep going(recursion)
         # if greater than or equal to
         # if root is none set root to node
-        if self.value == None:
-            self.value = value
-            return self.value
-        if self.value < value:
-
-            if self.right is None:
-                self.right = BinarySearchTree(value)
-            else:
-                return self.right.insert(value)
-        else:
+        if value < self.value:
             if self.left is None:
                 self.left = BinarySearchTree(value)
             else:
-                return self.left.insert(value)
+                # recurse to the left
+                self.left.insert(value)
+        if value >= self.value:
+            if self.right is None:
+                self.right = BinarySearchTree(value)
+                # recurse to the right
+
+            else:
+                self.right.insert(value)
+
+        # pre follow along
+        # if self.value == None:
+        #     self.value = value
+        #     return self.value
+        # if self.value < value:
+
+        #     if self.right is None:
+        #         self.right = BinarySearchTree(value)
+        #     else:
+        #         return self.right.insert(value)
+        # else:
+        #     if self.left is None:
+        #         self.left = BinarySearchTree(value)
+        #     else:
+        #         return self.left.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
+
     def contains(self, target):
         # if target == self.value, return it
         # else go left or right if smaller or bigger
+        # base case
         if target == self.value:
             return True
-        elif target < self.value and self.left is None:
-            return False
-        elif target >= self.value and self.right is None:
-            return False
-        elif target < self.value and self.left is not None:
-            return self.left.contains(target)
-        elif target >= self.value and self.right is not None:
-            return self.right.contains(target)
+            # if target is less than self.value we go left
+        if target < self.value:
+            if self.left is None:
+                return False
+            else:
+                # recurse
+                self.left.contains(target)
+        else:
+            if self.right is None:
+                return False
+            else:
+                return self.right.contains(target)
+                # return the recursion or you will lose state
+
+        # pre follow
+        #         # if target == self.value:
+        #     return True
+        # elif target < self.value and self.left is None:
+        #     return False
+        # elif target >= self.value and self.right is None:
+        #     return False
+        # elif target < self.value and self.left is not None:
+        #     return self.left.contains(target)
+        # elif target >= self.value and self.right is not None:
+        #     return self.right.contains(target)
 
     # Return the maximum value found in the tree
     # if right exists, go right, else return self.value
+
     def get_max(self):
         if self.right is None:
             return self.value
